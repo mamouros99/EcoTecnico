@@ -12,7 +12,7 @@ const routes = [
         component: () => import('pages/ScanPage.vue')
       },
       {
-        path: 'report',
+        path: 'report/:id',
         component: () => import('pages/ReportPage.vue')
       }
     ]

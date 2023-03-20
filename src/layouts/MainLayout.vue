@@ -1,7 +1,10 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
+    <q-header flat>
       <q-toolbar class="text-center">
+        <q-btn
+          icon-right=""
+        />
         <q-toolbar-title>
           Mobile App
         </q-toolbar-title>
@@ -11,21 +14,15 @@
       <router-view/>
     </q-page-container>
     <q-footer>
-      <q-toolbar class="full-width">
-        <q-tabs active-color="red">
-          <q-route-tab
-            icon="home"
-            :to="'/'"
-          />
-          <q-route-tab
-            icon="camera"
-            :to="'scan'"
-          />
-          <q-route-tab
-            icon="report"
-            :to="'report'"
-          />
-        </q-tabs>
+      <q-toolbar class="full-width justify-evenly">
+        <q-btn
+          flat
+          size="lg"
+          v-for="button in buttons"
+          :key="button.path"
+          :icon="button.icon"
+          :to="button.path"
+        />
       </q-toolbar>
     </q-footer>
   </q-layout>
@@ -39,8 +36,23 @@ export default defineComponent({
 
   setup () {
     const page = ref('one')
+    const buttons = ref([
+      {
+        path: '/',
+        icon: 'home'
+      },
+      {
+        path: '/scan',
+        icon: 'camera'
+      },
+      {
+        path: '/report/1',
+        icon: 'report'
+      }
+    ])
     return {
-      page
+      page,
+      buttons
     }
   }
 })
