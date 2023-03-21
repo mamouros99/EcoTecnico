@@ -1,6 +1,6 @@
 <template>
-  <q-page padding>
-    <q-card-section class="column">
+  <q-page padding style="max-width: 700px; margin: auto">
+    <q-card-section class="column self-center">
       <div class="text-h5 q-pa-sm">
         Selecione os problemas existentes na Eco Ilha {{ id }}:
       </div>
@@ -54,50 +54,10 @@
         @click="submit=!submit"
       />
     </q-card-section>
-    <q-dialog
+    <ConfirmationDialog
       v-model="submit"
-    >
-      <q-card>
-        <q-card-section>
-          <div class="text-h6">Confirmar Submissão</div>
-        </q-card-section>
-        <q-separator/>
-        <q-card-section style="width: 30vh">
-          <q-list separator>
-            <q-item-label>
-              Você selecionou:
-            </q-item-label>
-            <q-item>
-              <q-item-section>
-                <q-icon name="delete"/>
-              </q-item-section>
-              <q-item-section>
-                Active
-              </q-item-section>
-            </q-item>
-
-            <q-item>
-              <q-item-section>
-                <q-icon name="recycling"/>
-              </q-item-section>
-              <q-item-section>
-                Active
-              </q-item-section>
-            </q-item>
-
-            <q-item>
-              <q-item-section>
-                <q-icon name="wash"/>
-              </q-item-section>
-              <q-item-section>
-                Active
-              </q-item-section>
-            </q-item>
-          </q-list>
-        </q-card-section>
-      </q-card>
-
-    </q-dialog>
+      :result="result"
+    />
 
   </q-page>
 </template>
@@ -105,9 +65,10 @@
 <script>
 import { useRoute } from 'vue-router'
 import { ref } from 'vue'
+import ConfirmationDialog from 'components/ConfirmationDialog.vue'
 
 export default {
-  components: {},
+  components: { ConfirmationDialog },
   // name: 'PageName',
   setup () {
     const route = useRoute()

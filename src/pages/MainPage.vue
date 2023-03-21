@@ -1,9 +1,10 @@
 <template>
   <q-page class="flex flex-center">
     <q-img
+      class="q-ma-lg"
       alt="Ist Logo"
       src="~assets/Images/ist-logo.png"
-      width="50%"
+      style="max-width: 600px"
     />
   </q-page>
 </template>
