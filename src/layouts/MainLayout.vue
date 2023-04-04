@@ -1,40 +1,50 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header flat>
-      <q-toolbar class="text-center">
+    <q-header style="border-bottom: 3px solid white" flat>
+      <q-toolbar>
         <q-btn
-          icon-right=""
-        />
-        <q-toolbar-title>
-          Mobile App
+          flat
+        >
+          <q-icon
+            class=""
+            name="menu"
+            size="md"
+          />
+        </q-btn>
+        <q-toolbar-title
+          @click="router.push('/')"
+        >
+          EcoTécnico
         </q-toolbar-title>
       </q-toolbar>
     </q-header>
     <q-page-container>
       <router-view/>
     </q-page-container>
-    <q-footer>
-      <q-toolbar class="full-width justify-evenly">
-        <q-btn
-          flat
+    <q-footer
+      class="bg-transparent"
+    >
+      <q-toolbar>
+        <q-icon
+          class="q-pa-sm dimmed"
+          name="img:ist-logo.png"
           size="lg"
-          v-for="button in buttons"
-          :key="button.path"
-          :icon="button.icon"
-          :to="button.path"
         />
       </q-toolbar>
+
     </q-footer>
   </q-layout>
 </template>
 
 <script>
 import { defineComponent, ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
   name: 'MainLayout',
 
   setup () {
+    const router = useRouter()
     const page = ref('one')
     const buttons = ref([
       {
@@ -50,9 +60,11 @@ export default defineComponent({
         icon: 'report'
       }
     ])
+
     return {
       page,
-      buttons
+      buttons,
+      router
     }
   }
 })

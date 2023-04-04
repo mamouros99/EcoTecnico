@@ -1,5 +1,15 @@
 <template>
   <q-page padding class="column justify-between">
+    <q-toolbar>
+      <q-btn
+        flat
+        round
+        size="xl"
+        icon="keyboard_backspace"
+        :ripple="false"
+        @click="router.go(-1)"
+      />
+    </q-toolbar>
     <div/>
     <qrcode-stream
       :track="paintBoundingBox"
@@ -7,7 +17,7 @@
       v-if="scan"
       @decode="onDecode"
       class="self-center"
-      style="max-width: 350px"
+      style="max-width: 90vw"
     />
     <q-icon
       v-else
@@ -15,23 +25,20 @@
       color="grey-8"
       size="xl"
       class="self-center bg-grey-2 rounded-borders"
-      style="height: 250px; width: 350px"
+      style="height: 35vh; width: 90vw"
       @click="toggleScan"
     />
-    <q-btn
-      v-model="scan"
-      @click="toggleScan"
-      rounded
-      style="width:100px"
-      class="q-mb-sm self-center"
-    >
-      <q-icon
-        name="camera"
-      />
-      <div class="q-pl-xs">
-        Scan
-      </div>
-    </q-btn>
+    <div/>
+    <q-card class="q-ma-lg">
+      <q-card-section class="bg-primary">
+        <div class="text-h6">Tutorial:</div>
+        <div> 1. Clique na imagem da câmera</div>
+        <div> 2. Aponte a câmera para o QR Code presente na Ecoilha</div>
+
+      </q-card-section>
+    </q-card>
+    <div/>
+
   </q-page>
 </template>
 
@@ -81,7 +88,8 @@ export default {
       scan,
       toggleScan,
       camera,
-      paintBoundingBox
+      paintBoundingBox,
+      router
     }
   }
 }
