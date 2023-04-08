@@ -7,7 +7,7 @@
         size="xl"
         icon="keyboard_backspace"
         :ripple="false"
-        @click="router.go(-1)"
+        to="/"
       />
     </q-toolbar>
     <div/>
@@ -43,9 +43,10 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { QrcodeStream } from 'vue-qrcode-reader/src'
 import { useRouter } from 'vue-router'
+import { useIslandStore } from 'stores/IslandStore'
 
 export default {
   // name: 'PageName',
@@ -57,14 +58,24 @@ export default {
     const camera = ref('auto')
     const scan = ref(false)
     const router = useRouter()
+    const islandStore = useIslandStore()
     const onDecode = (res) => {
       const id = res.split('/').splice(-1)
-      router.push('report/' + id)
+
+      if (islandStore.hasIslandByID(id[0])) {
+        router.push('report/' + id)
+      } else {
+        router.push('badreport/')
+      }
     }
 
     const toggleScan = () => {
       scan.value = !scan.value
     }
+
+    onMounted(() => {
+      islandStore.fetchEcoIslands()
+    })
 
     const paintBoundingBox = (detectedCodes, ctx) => {
       for (const detectedCode of detectedCodes) {

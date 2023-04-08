@@ -34,7 +34,7 @@
     <q-btn
       color="primary"
       rounded size="xl"
-      style="border: 4px solid white"
+      style="border: 3px solid white"
       icon="photo_camera"
       label="Scan QR Code !"
       @click="router.push('/scan')"
