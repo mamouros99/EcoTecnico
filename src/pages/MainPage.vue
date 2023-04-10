@@ -7,8 +7,7 @@
       style="filter: brightness(20%); height: 100vh"
     />
     <q-card
-      class="q-pa-lg bg-grey-8"
-      style="width: 90vw"
+      style="width: 90vw; background-color: rgb(192,192,192,.5)"
     >
       <q-card-section class="text-center">
         O <span class="text-bold text-italic">Técnico Faz a Diferença</span> está a tentar tornar o campus um espaço
@@ -43,7 +42,7 @@
 </template>
 
 <script>
-import { defineComponent, onMounted } from 'vue'
+import { defineComponent } from 'vue'
 import { useRouter } from 'vue-router'
 
 export default defineComponent({
@@ -51,10 +50,6 @@ export default defineComponent({
 
   setup () {
     const router = useRouter()
-
-    onMounted(() => {
-      console.log('mounting')
-    })
 
     return { router }
   }

@@ -2,16 +2,9 @@
   <q-layout view="lHh Lpr lFf">
     <q-header style="border-bottom: 3px solid white" flat>
       <q-toolbar>
-        <q-btn
-          flat
-        >
-          <q-icon
-            class=""
-            name="menu"
-            size="md"
-          />
-        </q-btn>
+
         <q-toolbar-title
+          class="text-h5 q-ml-lg"
           @click="router.push('/')"
         >
           EcoTécnico

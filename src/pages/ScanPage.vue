@@ -29,14 +29,7 @@
       @click="toggleScan"
     />
     <div/>
-    <q-card class="q-ma-lg">
-      <q-card-section class="bg-primary">
-        <div class="text-h6">Tutorial:</div>
-        <div> 1. Clique na imagem da câmera</div>
-        <div> 2. Aponte a câmera para o QR Code presente na Ecoilha</div>
-
-      </q-card-section>
-    </q-card>
+    <ScanTutorialCard/>
     <div/>
 
   </q-page>
@@ -46,11 +39,13 @@
 import { onMounted, ref } from 'vue'
 import { QrcodeStream } from 'vue-qrcode-reader/src'
 import { useRouter } from 'vue-router'
+import ScanTutorialCard from 'components/ScanTutorialCard.vue'
 import { useIslandStore } from 'stores/IslandStore'
 
 export default {
   // name: 'PageName',
   components: {
+    ScanTutorialCard,
     QrcodeStream
   },
 
@@ -59,16 +54,11 @@ export default {
     const scan = ref(false)
     const router = useRouter()
     const islandStore = useIslandStore()
+
     const onDecode = (res) => {
       const id = res.split('/').splice(-1)
-
-      if (islandStore.hasIslandByID(id[0])) {
-        router.push('report/' + id)
-      } else {
-        router.push('badreport/')
-      }
+      router.push('report/' + id)
     }
-
     const toggleScan = () => {
       scan.value = !scan.value
     }
