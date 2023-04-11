@@ -28,7 +28,7 @@ export const useIslandStore = defineStore('IslandStore', () => {
 
     console.log('ecoislands', islands)
 
-    if (isInteger(id)) {
+    if (isStringInteger(id)) {
       const island = islands.value.filter(e => e.id === +id)
       console.log('island', island)
       if (island.length !== 0) {
@@ -39,7 +39,7 @@ export const useIslandStore = defineStore('IslandStore', () => {
     return false
   }
 
-  function isInteger (str) {
+  function isStringInteger (str) {
     if (typeof str !== 'string') {
       return false
     }
