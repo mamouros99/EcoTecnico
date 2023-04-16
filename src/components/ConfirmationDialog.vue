@@ -99,7 +99,6 @@ export default {
             dirty = dirty + '0'
           }
         } else {
-          // TODO Replace with -
           full = full + '0'
           separation = separation + '0'
           dirty = dirty + '0'
