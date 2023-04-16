@@ -21,7 +21,7 @@ export const useIslandStore = defineStore('IslandStore', () => {
   const setIslandByID = (id) => {
     console.log('id', id)
 
-    // TODO Remove this
+    // TODO Remove this?
     if (islands.value.length === 0) {
       fetchEcoIslands()
     }

@@ -47,7 +47,7 @@ export default {
     } = useNotify()
 
     const final = ref({
-      ecoIsland: props.page,
+      ecoisland: props.page,
       full: '',
       separation: '',
       dirty: '',
@@ -112,13 +112,13 @@ export default {
       processData()
       console.log(final, formatDate())
       await axios
-        .post('http://localhost:3001/reports', final.value)
-        .then(response => {
+        .post('http://localhost:3000/reports', final.value)
+        .then(() => {
           notifySuccess()
           router.push('/')
         }
         )
-        .catch(e => {
+        .catch(() => {
           notifyError('Alguma coisa correu mal, por favor tente mais tarde')
           router.push('/')
         }
