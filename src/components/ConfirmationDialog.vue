@@ -30,29 +30,21 @@
 </template>
 
 <script>
-import { useRouter } from 'vue-router'
-import useNotify from 'src/composables/UseNotify'
-// eslint-disable-next-line no-unused-vars
-import axios from 'axios'
 import { ref } from 'vue'
+import { useReportStore } from 'stores/ReportStore'
 
 export default {
   props: ['result', 'page'],
   setup (props) {
-    const router = useRouter()
-
-    const {
-      notifySuccess,
-      notifyError
-    } = useNotify()
-
     const final = ref({
-      ecoisland: props.page,
+      ecoIslandId: props.page,
       full: '',
       separation: '',
       dirty: '',
       time: ''
     })
+
+    const { addNewReport } = useReportStore()
 
     const processData = () => {
       // Adapts data to be compatible with db
@@ -109,47 +101,11 @@ export default {
     const postResult = async () => {
       // remove unchecked bins
       processData()
-      console.log(final, formatDate())
-      await axios
-        .post('http://localhost:3000/reports', final.value)
-        .then(() => {
-          notifySuccess()
-          router.push('/')
-        }
-        )
-        .catch(() => {
-          notifyError('Alguma coisa correu mal, por favor tente mais tarde')
-          router.push('/')
-        }
-        )
-    }
-
-    const formatDate = () => {
-      // receives string
-      const date = new Date(parseInt(final.value.time))
-
-      return (
-        [
-          padTo2Digits(date.getDate()),
-          padTo2Digits(date.getMonth() + 1),
-          date.getFullYear()
-        ].join('/') +
-        ' ' +
-        [
-          padTo2Digits(date.getHours()),
-          padTo2Digits(date.getMinutes()),
-          padTo2Digits(date.getSeconds())
-        ].join(':')
-      )
-
-      function padTo2Digits (num) {
-        return num.toString().padStart(2, '0')
-      }
+      addNewReport(final.value)
     }
 
     return {
-      postResult,
-      notifySuccess
+      postResult
     }
   }
 }

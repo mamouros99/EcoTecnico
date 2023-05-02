@@ -16,8 +16,10 @@ const routes = [
         component: () => import('pages/ReportPage.vue')
       },
       {
-        path: 'bad-scan',
-        component: () => import('pages/BadScanPage.vue')
+        path: 'bad-page',
+        name: 'badpage',
+        props: { messageTitle: true },
+        component: () => import('pages/BadPage.vue')
       }
     ]
   },

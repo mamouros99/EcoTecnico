@@ -17,7 +17,7 @@
       v-if="scan"
       @decode="onDecode"
       class="self-center"
-      style="max-width: 90vw"
+      style="max-width: 90%"
     />
     <q-icon
       v-else
@@ -36,11 +36,12 @@
 </template>
 
 <script>
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 import { QrcodeStream } from 'vue-qrcode-reader/src'
 import { useRouter } from 'vue-router'
 import ScanTutorialCard from 'components/ScanTutorialCard.vue'
 import { useIslandStore } from 'stores/IslandStore'
+import useNotify from 'src/composables/UseNotify'
 
 export default {
   // name: 'PageName',
@@ -54,18 +55,23 @@ export default {
     const scan = ref(false)
     const router = useRouter()
     const islandStore = useIslandStore()
+    const { notifyError } = useNotify()
 
     const onDecode = (res) => {
       const id = res.split('/').splice(-1)
-      router.push('report/' + id)
+      toggleScan()
+      islandStore.getEcoIslandById(id)
+        .then(() => {
+          router.push('report/' + id)
+        })
+        .catch(response => {
+          notifyError(response)
+        })
     }
+
     const toggleScan = () => {
       scan.value = !scan.value
     }
-
-    onMounted(() => {
-      islandStore.fetchEcoIslands()
-    })
 
     const paintBoundingBox = (detectedCodes, ctx) => {
       for (const detectedCode of detectedCodes) {
