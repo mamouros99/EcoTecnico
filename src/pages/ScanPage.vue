@@ -11,14 +11,18 @@
       />
     </q-toolbar>
     <div/>
-    <qrcode-stream
-      :track="paintBoundingBox"
-      :camera="camera"
-      v-if="scan"
-      @decode="onDecode"
+    <div
       class="self-center"
-      style="max-width: 90%"
-    />
+      v-if="scan"
+      :style="cameraSize ? 'max-width: 90%' : 'max-width: 50%'"
+    >
+      <qrcode-stream
+        :track="paintBoundingBox"
+        :camera="camera"
+        @decode="onDecode"
+        class="self-center"
+      />
+    </div>
     <q-icon
       v-else
       name="photo_camera"
@@ -42,6 +46,7 @@ import { useRouter } from 'vue-router'
 import ScanTutorialCard from 'components/ScanTutorialCard.vue'
 import { useIslandStore } from 'stores/IslandStore'
 import useNotify from 'src/composables/UseNotify'
+import { useQuasar } from 'quasar'
 
 export default {
   // name: 'PageName',
@@ -56,6 +61,7 @@ export default {
     const router = useRouter()
     const islandStore = useIslandStore()
     const { notifyError } = useNotify()
+    const $q = useQuasar()
 
     const onDecode = (res) => {
       const id = res.split('/').splice(-1)
@@ -96,7 +102,10 @@ export default {
       toggleScan,
       camera,
       paintBoundingBox,
-      router
+      router,
+      cameraSize: () => {
+        return ($q.screen.width > $q.screen.height)
+      }
     }
   }
 }
