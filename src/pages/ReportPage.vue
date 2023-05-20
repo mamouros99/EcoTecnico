@@ -1,113 +1,148 @@
 <template>
   <q-page padding style="max-width: 700px; margin: auto">
     <div v-if="loaded" class="column self-center q-ma-lg">
-      <div class="text-h5 q-pa-sm">
+      <div class="text-h5 q-pa-sm q-mb-lg">
         Selecione os problemas existentes na Eco Ilha {{ id }}:
       </div>
-      <q-list v-for="bin in bins" :key="bin.name">
+      <q-list>
+        <div v-for="bin in bins" :key="bin.name">
+          <q-expansion-item
+            group="test"
+            :hide-expand-icon="true"
+          >
+            <template v-slot:header>
+              <q-item
+                class="full-width"
+                v-ripple:green
+              >
+                <q-item-section
+                  :class="isClassActive(bin)"
+                >
+                  <q-item-label class="text-h6">{{ bin.name }}</q-item-label>
+                </q-item-section>
+              </q-item>
+            </template>
+
+            <q-list>
+              <q-separator/>
+              <q-item
+                class="bg-grey-10"
+                clickable
+                v-ripple:primary
+                @click="bin.full=!bin.full"
+              >
+                <q-item-section>
+                  <q-item-label>
+                    Cheio
+                  </q-item-label>
+                </q-item-section>
+                <q-item-section side>
+                  <q-checkbox
+                    style="opacity: 1 !important;"
+                    color="primary"
+                    v-model="bin.full"
+                  />
+                </q-item-section>
+              </q-item>
+              <q-separator/>
+              <q-item
+                class="bg-grey-10"
+                clickable
+                v-ripple:primary
+                @click="bin.dirty=!bin.dirty"
+              >
+                <q-item-section>
+                  <q-item-label>
+                    Sujo
+                  </q-item-label>
+                </q-item-section>
+                <q-item-section side>
+                  <q-checkbox
+                    style="opacity: 1 !important;"
+                    color="primary"
+                    v-model="bin.dirty"
+                  />
+                </q-item-section>
+              </q-item>
+              <q-separator/>
+              <q-item
+                class="bg-grey-10"
+                clickable
+                v-ripple:primary
+                @click="bin.separation=!bin.separation"
+              >
+                <q-item-section>
+                  <q-item-label>
+                    Má Separação
+                  </q-item-label>
+                </q-item-section>
+                <q-item-section side>
+                  <q-checkbox
+                    style="opacity: 1 !important;"
+                    color="primary"
+                    v-model="bin.separation"
+                  />
+                </q-item-section>
+              </q-item>
+            </q-list>
+          </q-expansion-item>
+          <q-separator/>
+        </div>
+        <q-separator color="primary"/>
         <q-expansion-item
           group="test"
-          :hide-expand-icon="true"
-        >
+          :hide-expand-icon="true">
           <template v-slot:header>
             <q-item
               class="full-width"
-              v-ripple:green
+              v-ripple:primary
             >
               <q-item-section
-                :class="isClassActive(bin)"
+                class="row"
+                :class="message ? 'text-primary':'text-grey-5'"
               >
-                <q-item-label class="text-h6">{{ bin.name }}</q-item-label>
+                <q-item-label class="text-h6 row items-center justify-between">
+                  <div>Notas
+                    <q-icon name="chat"/>
+                  </div>
+                  <q-btn v-if="message.length > 0" flat icon="close" @click="message=''"/>
+                </q-item-label>
+
               </q-item-section>
             </q-item>
           </template>
 
-          <q-list class="q-px-lg">
-            <q-separator/>
-            <q-item
-              class="bg-grey-10"
-              clickable
-              v-ripple:primary
-              @click="bin.full=!bin.full"
-            >
-              <q-item-section>
-                <q-item-label>
-                  Cheio
-                </q-item-label>
-              </q-item-section>
-              <q-item-section side>
-                <q-checkbox
-                  style="opacity: 1 !important;"
-                  color="primary"
-                  v-model="bin.full"
-                />
-              </q-item-section>
-            </q-item>
-            <q-separator/>
-            <q-item
-              class="bg-grey-10"
-              clickable
-              v-ripple:primary
-              @click="bin.dirty=!bin.dirty"
-            >
-              <q-item-section>
-                <q-item-label>
-                  Sujo
-                </q-item-label>
-              </q-item-section>
-              <q-item-section side>
-                <q-checkbox
-                  style="opacity: 1 !important;"
-                  color="primary"
-                  v-model="bin.dirty"
-                />
-              </q-item-section>
-            </q-item>
-            <q-separator/>
-            <q-item
-              class="bg-grey-10"
-              clickable
-              v-ripple:primary
-              @click="bin.separation=!bin.separation"
-            >
-              <q-item-section>
-                <q-item-label>
-                  Má Separação
-                </q-item-label>
-              </q-item-section>
-              <q-item-section side>
-                <q-checkbox
-                  style="opacity: 1 !important;"
-                  color="primary"
-                  v-model="bin.separation"
-                />
-              </q-item-section>
-            </q-item>
-          </q-list>
+          <q-input
+            class="q-pa-sm"
+            filled
+            placeholder="Sugestões e observações..."
+            maxlength="300"
+            autogrow
+            :error="message.length>=300"
+            no-error-icon
+            v-model="message"/>
         </q-expansion-item>
-
-        <q-separator/>
       </q-list>
-      <div
-        class="row justify-center q-ma-xl"
-      >
-        <q-btn
-          label="Submeter"
-          padding="sm md"
-          color="secondary"
-          rounded
-          class="text-h6"
-          style="border: 3px solid "
-          @click="getReadySubmit"
-        />
-      </div>
+
       <ConfirmationDialog
         v-model="toggleConfirmationCard"
         :result="reportedOnBins"
         :page="id"
+        :message="message"
       />
     </div>
-
+    <q-page-sticky position="bottom" :offset="[0,20]">
+      <q-btn
+        icon="send"
+        label="Submeter"
+        padding="sm md"
+        color="secondary"
+        rounded
+        class="text-h6"
+        style="border: 3px solid "
+        @click="getReadySubmit"
+      />
+    </q-page-sticky>
   </q-page>
 </template>
 
@@ -128,6 +163,7 @@ export default {
     const router = useRouter()
 
     const id = route.params.id
+    const message = ref('')
 
     const bins = ref([])
     const toggleConfirmationCard = ref(false)
@@ -236,6 +272,7 @@ export default {
 
     return {
       id,
+      message,
       loaded,
       toggleConfirmationCard,
       bins,

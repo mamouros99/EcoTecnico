@@ -34,14 +34,15 @@ import { ref } from 'vue'
 import { useReportStore } from 'stores/ReportStore'
 
 export default {
-  props: ['result', 'page'],
+  props: ['result', 'page', 'message'],
   setup (props) {
     const final = ref({
       ecoIslandId: props.page,
       full: '',
       separation: '',
       dirty: '',
-      time: ''
+      time: '',
+      message: props.message
     })
 
     const { addNewReport } = useReportStore()
