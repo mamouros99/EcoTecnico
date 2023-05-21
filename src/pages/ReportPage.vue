@@ -126,6 +126,7 @@
 
       <ConfirmationDialog
         v-model="toggleConfirmationCard"
+        v-if="toggleConfirmationCard"
         :result="reportedOnBins"
         :page="id"
         :message="message"
@@ -176,7 +177,7 @@ export default {
     } = useNotify()
     const getReadySubmit = () => {
       // check if all good with submission
-      if (reportedOnBins.value.length > 0) {
+      if (reportedOnBins.value.length > 0 || message.value.length > 0) {
         toggleConfirmationCard.value = !toggleConfirmationCard.value
       } else {
         notifyWarning('Não selecionou qualquer problema')
