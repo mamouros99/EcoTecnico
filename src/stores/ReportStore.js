@@ -12,7 +12,7 @@ export const useReportStore = defineStore('ReportStore', () => {
 
   const addNewReport = async (report) => {
     await api
-      .post('http://localhost:3001/report/add', report)
+      .post('/report/add', report)
       .then(() => {
         notifySuccess()
         router.push('/')

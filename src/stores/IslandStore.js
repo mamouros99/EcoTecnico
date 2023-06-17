@@ -7,7 +7,7 @@ export const useIslandStore = defineStore('IslandStore', () => {
       return Promise.reject('Qr code não pertence a uma ecoilha válida')
     }
 
-    return await api.get('http://localhost:3001/ecoisland/' + id)
+    return await api.get('ecoisland/' + id)
   }
 
   return {
