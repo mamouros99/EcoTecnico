@@ -18,15 +18,15 @@
       </q-card-section>
 
       <q-card-section class="text-center">
-        Mas para o conseguir, precisa da tua ajuda! Se nas ecoilhas vires algum caixote
+        Mas para o conseguir, precisa da tua ajuda! Se nas EcoIlhas vires algum caixote
         <span class="text-bold">cheio</span>,
-        <span class="text-bold">sujo</span>, ou com
+        <span class="text-bold">sujo</span> ou com
         <span class="text-bold">má separação</span>,
         informa-nos!
       </q-card-section>
 
       <q-card-section class="text-center">
-        Basta ler o QR code na ecoilha, e identificar o problema! Ajuda-nos a tornar o Técnico um lugar mais Eco!
+        Basta ler o QR code na placa da EcoIlha e identificar o problema! Ajuda-nos a tornar o Técnico um lugar mais Eco!
       </q-card-section>
     </q-card>
 
