@@ -5,7 +5,7 @@
         <div class="text-h6">Tem a certeza que pretende submeter?</div>
       </q-card-section>
       <q-separator/>
-      <q-card-section class="row justify-around">
+      <q-card-section horizontal class="q-pt-md justify-around">
         <q-btn
           rounded
           icon="edit"
