@@ -10,21 +10,14 @@ npm install
 ```
 
 ### Start the app in development mode (hot-code reloading, error reporting, etc.)
+## In the dir, there must be a file with this name: .env.xxx, where xxx can be anything. 
 ```bash
-quasar dev
+VUE_APP_ENV_FILE=xxx quasar dev
 ```
-
-
-### Lint the files
-```bash
-yarn lint
-# or
-npm run lint
-```
-
 
 
 ### Build the app for production
+## Must include a environment variable VUE_APP_ENV_FILE=xxx
 ```bash
 quasar build
 ```
