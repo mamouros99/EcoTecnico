@@ -7,7 +7,7 @@ import axios from 'axios'
 // good idea to move this instance creation inside of the
 // "export default () => {}" function below (which runs individually
 // for each client)
-const api = axios.create({ baseURL: process.env.DEV ? 'http://localhost:3001' :'http://193.136.129.238:3001' })
+const api = axios.create({ baseURL: process.env.VUE_APP_DATABASE_URL })
 api.interceptors.response.use((response) => {
   return response
 }, error => {
