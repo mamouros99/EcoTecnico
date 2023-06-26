@@ -1,6 +1,7 @@
 <template>
   <q-page padding style="max-width: 700px; margin: auto">
     <div v-if="loaded" class="column self-center q-ma-lg">
+
       <div class="text-h5 q-pa-sm q-mb-lg">
         Selecione os problemas existentes na Eco Ilha {{ id }}:
       </div>
@@ -17,8 +18,17 @@
               >
                 <q-item-section
                   :class="isClassActive(bin)"
+                  class="row"
                 >
-                  <q-item-label class="text-h6">{{ bin.name }}</q-item-label>
+                  <q-item-label class="text-h6 col">{{ bin.name }}</q-item-label>
+                </q-item-section>
+                <q-item-section avatar :class="isClassActive(bin)"
+                >
+                  <q-icon
+                    :name="isClassActiveBin(bin)"
+                    :color="bin.color"
+                    size="md"
+                  />
                 </q-item-section>
               </q-item>
             </template>
@@ -102,10 +112,13 @@
                 :class="message ? 'text-primary':'text-grey-5'"
               >
                 <q-item-label class="text-h6 row items-center justify-between">
-                  <div>Notas
-                    <q-icon name="chat"/>
-                  </div>
-                  <q-btn v-if="message.length > 0" flat icon="close" @click="message=''"/>
+                  <q-item-section style="display: inline-block">
+                    Notas
+                    <q-btn v-if="message.length > 0" flat dense color="red" icon="close" @click="message=''"/>
+                  </q-item-section>
+                  <q-item-section avatar>
+                    <q-icon class="q-pr-xs" :name="message.length > 0 ? 'chat' : 'chat_bubble_outline'"/>
+                  </q-item-section>
                 </q-item-label>
 
               </q-item-section>
@@ -120,9 +133,21 @@
             autogrow
             :error="message.length>=300"
             no-error-icon
-            v-model="message"/>
+            v-model="message"
+          />
         </q-expansion-item>
       </q-list>
+
+      <q-btn
+        icon="send"
+        label="Submeter"
+        padding="sm md"
+        color="secondary"
+        rounded
+        class="text-h6 q-mt-md q-mx-xl"
+        style="border: 3px solid "
+        @click="getReadySubmit"
+      />
 
       <ConfirmationDialog
         v-model="toggleConfirmationCard"
@@ -132,18 +157,7 @@
         :message="message"
       />
     </div>
-    <q-page-sticky position="bottom" :offset="[0,20]">
-      <q-btn
-        icon="send"
-        label="Submeter"
-        padding="sm md"
-        color="secondary"
-        rounded
-        class="text-h6"
-        style="border: 3px solid "
-        @click="getReadySubmit"
-      />
-    </q-page-sticky>
+
   </q-page>
 </template>
 
@@ -217,15 +231,24 @@ export default {
 
     const isClassActive = (bin) => {
       if (bin.full || bin.separation || bin.dirty) {
-        return 'text-primary'
+        return 'text-' + bin.color
       } else {
         return 'text-grey-5'
+      }
+    }
+
+    const isClassActiveBin = (bin) => {
+      if (bin.full || bin.separation || bin.dirty) {
+        return 'delete'
+      } else {
+        return 'delete_outline'
       }
     }
     const defaultBins = [
       {
         label: 'undifferentiated',
         name: 'Indiferenciado',
+        color: 'white',
         checked: false,
         full: false,
         dirty: false,
@@ -234,6 +257,7 @@ export default {
       {
         label: 'paper',
         name: 'Papel',
+        color: 'blue',
         checked: false,
         full: false,
         dirty: false,
@@ -242,6 +266,7 @@ export default {
       {
         label: 'plastic',
         name: 'Embalagens',
+        color: 'yellow',
         checked: false,
         full: false,
         dirty: false,
@@ -252,6 +277,7 @@ export default {
     const glass = {
       label: 'glass',
       name: 'Vidro',
+      color: 'green',
       checked: false,
       full: false,
       dirty: false,
@@ -261,6 +287,7 @@ export default {
     const bio = {
       label: 'bio',
       name: 'Biorresíduos',
+      color: 'brown',
       checked: false,
       full: false,
       dirty: false,
@@ -279,7 +306,8 @@ export default {
       bins,
       getReadySubmit,
       reportedOnBins,
-      isClassActive
+      isClassActive,
+      isClassActiveBin
     }
   }
 }
