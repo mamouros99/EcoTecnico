@@ -1,8 +1,8 @@
 {
-  "name": "mobile-app",
+  "name": "eco-tecnico-mobile",
   "version": "0.0.1",
-  "description": "A Quasar Project",
-  "productName": "MobileApp",
+  "description": "Projeto tese: Allows users to make reports on the different ecoislands",
+  "productName": "Eco Tecnico Mobile",
   "author": "mamouros99 <tiago.mamouros@tecnico.ulisboa.pt>",
   "private": true,
   "scripts": {

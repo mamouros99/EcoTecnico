@@ -3,7 +3,7 @@
     <div v-if="loaded" class="column self-center q-ma-lg">
 
       <div class="text-h5 q-pa-sm q-mb-lg">
-        Selecione os problemas existentes na Eco Ilha {{ id }}:
+        Selecione os problemas existentes na Eco Ilha {{ ecoIsland.identifier }} - {{ ecoIsland.building }}:
       </div>
       <q-list>
         <div v-for="bin in bins" :key="bin.name">
@@ -171,7 +171,6 @@ import useNotify from 'src/composables/UseNotify'
 export default {
   components: { ConfirmationDialog },
   // name: 'PageName',
-  props: ['ecoIsland'],
   setup () {
     const route = useRoute()
     const islandStore = useIslandStore()
@@ -302,6 +301,7 @@ export default {
       id,
       message,
       loaded,
+      ecoIsland,
       toggleConfirmationCard,
       bins,
       getReadySubmit,
