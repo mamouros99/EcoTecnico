@@ -5,14 +5,17 @@ const routes = [
     children: [
       {
         path: '',
+        name: 'home',
         component: () => import('pages/MainPage.vue')
       },
       {
         path: 'scan',
+        name: 'scan',
         component: () => import('pages/ScanPage.vue')
       },
       {
         path: 'question',
+        name: 'question',
         component: () => import('pages/QuestionPage.vue')
       },
       {

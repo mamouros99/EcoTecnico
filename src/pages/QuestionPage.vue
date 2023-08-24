@@ -5,9 +5,41 @@
       @submit="onSubmit"
       @reset="onReset"
     >
-      <div class="text-h4 q-py-md">
-        Dúvidas e Questões
-      </div>
+      <q-toolbar class="text-h4 q-py-lg">
+        <q-toolbar-title
+          class="text-h5">
+          Dúvidas e Questões
+        </q-toolbar-title>
+        <q-btn
+          color="secondary"
+          round
+          dense
+          icon="question_mark"
+          @click="helpDialog = true"
+        />
+        <q-dialog v-model="helpDialog">
+          <q-card class="bg-primary">
+            <q-card-section class="q-mx-md justify-between" horizontal>
+              <q-card-section class="text-h5">
+                Ajuda
+              </q-card-section>
+              <q-btn
+                icon="close"
+                flat
+                round
+                dense
+                color="white"
+                v-close-popup
+              />
+            </q-card-section>
+            <q-card-section class="text-justify bg-blue-grey-9">
+              <p>Se tem alguma questão relativamente ao projeto Técnico faz a Diferença ou relativamente à reciclagem no
+                geral, por favor apresente a sua questão aqui.</p>
+              <p>O email serve apenas para receber a resposta.</p>
+            </q-card-section>
+          </q-card>
+        </q-dialog>
+      </q-toolbar>
 
       <q-input
         v-model="currentQuestion"
@@ -17,7 +49,7 @@
         :rules="[ val => val && val.length > 0 || 'Escreva a pergunta']"
       >
         <template v-slot:append>
-          <q-icon class="q-mr-md" name="question_mark"/>
+          <q-icon class="q-mr-md" size="md" name="edit_note"/>
         </template>
       </q-input>
 
@@ -52,6 +84,8 @@ export default {
     const currentEmail = ref('')
     const currentQuestion = ref('')
 
+    const helpDialog = ref(false)
+
     const questionStore = useQuestionStore()
 
     const onSubmit = () => {
@@ -70,6 +104,7 @@ export default {
     return {
       currentEmail,
       currentQuestion,
+      helpDialog,
       onSubmit,
       onReset
     }

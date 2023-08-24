@@ -23,7 +23,7 @@ export default function useNotify () {
 
   const notifyError = (msg) => {
     quasar.notify({
-      message: msg,
+      message: msg || 'Houve um  problema',
       color: 'negative',
       timeout: 3000,
       icon: 'error'

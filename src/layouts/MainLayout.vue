@@ -9,9 +9,14 @@
           <q-btn
             no-caps
             flat
-            class="text-h5 q-ml-lg"
+            class="text-h5 q-ml-sm"
             @click="router.push('/')"
           >
+            <q-icon
+              class="q-pr-sm"
+              name="home"
+              size="md"
+            />
             TFaD
           </q-btn>
 
@@ -47,11 +52,25 @@
     <q-footer
       class="bg-transparent"
     >
-      <q-toolbar>
+      <q-toolbar class="justify-between">
         <q-icon
-          class="q-pa-sm"
+          class="q-ml-sm q-mb-md"
           name="img:ist-logo.png"
+          size="xl"
+        />
+
+        <q-btn
+          v-if="route.name !== 'question'"
+          rounded
+          label="Questões"
+          color="secondary"
+          dense
+          flat
+          class=" q-mb-md q-mr-sm q-pl-sm "
+          icon-right="question_mark"
           size="lg"
+          style="border: 5px dotted #26A69A; "
+          @click="router.push('/question')"
         />
 
       </q-toolbar>
@@ -62,33 +81,20 @@
 
 <script>
 import { defineComponent, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 
 export default defineComponent({
   name: 'MainLayout',
 
   setup () {
     const router = useRouter()
+    const route = useRoute()
     const page = ref('one')
     const login = ref(false)
-    const buttons = ref([
-      {
-        path: '/',
-        icon: 'home'
-      },
-      {
-        path: '/scan',
-        icon: 'camera'
-      },
-      {
-        path: '/report/1',
-        icon: 'report'
-      }
-    ])
 
     return {
+      route,
       page,
-      buttons,
       router,
       login
     }

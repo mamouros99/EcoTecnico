@@ -26,8 +26,10 @@
       </q-card-section>
 
       <q-card-section class="text-center">
-        Basta ler o QR code na placa da EcoIlha e identificar o problema! Ajuda-nos a tornar o Técnico um lugar mais Eco!
+        Basta ler o QR code na placa da EcoIlha e identificar o problema! Ajuda-nos a tornar o Técnico um lugar mais
+        Eco!
       </q-card-section>
+
     </q-card>
 
     <q-btn
