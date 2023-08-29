@@ -1,7 +1,7 @@
 <template>
   <q-page padding>
     <q-form
-      class="q-pa-lg"
+      class="q-pa-lg "
       @submit="onSubmit"
       @reset="onReset"
     >
@@ -41,34 +41,38 @@
         </q-dialog>
       </q-toolbar>
 
-      <q-input
-        v-model="currentQuestion"
-        standout
-        label="Pergunta"
-        type="textarea"
-        :rules="[ val => val && val.length > 0 || 'Escreva a pergunta']"
-      >
-        <template v-slot:append>
-          <q-icon class="q-mr-md" size="md" name="edit_note"/>
-        </template>
-      </q-input>
+      <div>
+        <q-input
+          v-model="currentQuestion"
+          standout
+          label="Pergunta"
+          type="textarea"
+          :rules="[ val => val && val.length > 0 || 'Escreva a pergunta']"
+        >
+          <template v-slot:append>
+            <q-icon class="q-mr-md" size="md" name="edit_note"/>
+          </template>
+        </q-input>
 
-      <q-input
-        class="q-mt-lg"
-        v-model="currentEmail"
-        standout
-        label="Email"
-        type="email"
-        :rules="[ val => val && val.length > 0 || 'Insira o seu email']"
-      >
-        <template v-slot:append>
-          <q-icon class="q-mr-md" name="email"/>
-        </template>
-      </q-input>
+        <q-input
+          class="q-mt-lg"
+          v-model="currentEmail"
+          standout
+          label="Email"
+          type="email"
+          :rules="[ val => val && val.length > 0 || 'Insira o seu email']"
+        >
+          <template v-slot:append>
+            <q-icon class="q-mr-md" name="email"/>
+          </template>
+        </q-input>
 
-      <div class="q-px-lg q-mt-lg row justify-between">
-        <q-btn label="Submit" type="submit" color="primary"/>
-        <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm"/>
+        <q-space/>
+
+        <div class="q-px-lg q-mt-lg row justify-between">
+          <q-btn label="Submit" type="submit" color="primary"/>
+          <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm"/>
+        </div>
       </div>
     </q-form>
   </q-page>

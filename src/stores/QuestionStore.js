@@ -10,8 +10,18 @@ export const useQuestionStore = defineStore('QuestionStore', () => {
     return await api
       .post('question/add', question)
       .then(() => {
-        notification.notifySuccess('Pergunta foi gravado com sucesso')
+        notification.notifySuccess('Pergunta foi gravada com sucesso')
         router.push({ name: 'home' })
+      })
+      .catch(() => {
+        notification.notifyError()
+      })
+  }
+
+  const addNewAnswer = async (answer, questionId) => {
+    return await api.post('answer/' + questionId)
+      .then(() => {
+        notification.notifySuccess('Mensagem foi enviada com sucesso')
       })
       .catch(() => {
         notification.notifyError()
@@ -22,6 +32,7 @@ export const useQuestionStore = defineStore('QuestionStore', () => {
   const router = useRouter()
 
   return {
-    addNewQuestion
+    addNewQuestion,
+    addNewAnswer
   }
 })

@@ -14,9 +14,19 @@ const routes = [
         component: () => import('pages/ScanPage.vue')
       },
       {
-        path: 'question',
+        path: 'question/:id',
         name: 'question',
         component: () => import('pages/QuestionPage.vue')
+      },
+      {
+        path: 'questions',
+        name: 'questions',
+        component: () => import('pages/QuestionListPage.vue')
+      },
+      {
+        path: 'newquestion',
+        name: 'newquestion',
+        component: () => import('pages/NewQuestionPage.vue')
       },
       {
         path: 'report/:id',

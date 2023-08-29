@@ -60,7 +60,7 @@
         />
 
         <q-btn
-          v-if="route.name !== 'question'"
+          v-if="route.name !== 'questions'"
           rounded
           label="Questões"
           color="secondary"
@@ -70,7 +70,7 @@
           icon-right="question_mark"
           size="lg"
           style="border: 5px dotted #26A69A; "
-          @click="router.push('/question')"
+          @click="router.push('/questions')"
         />
 
       </q-toolbar>
