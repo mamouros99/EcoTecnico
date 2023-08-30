@@ -1,6 +1,15 @@
 <template>
-  <q-page padding>
-    <!-- content -->
+  <q-page padding class="column justify-center row items-center">
+    <q-card flat bordered>
+      <q-card-section class="text-h4 text-primary">
+        Por favor aguarde...
+      </q-card-section>
+      <q-card-section class="column items-center ">
+        <q-spinner-bars
+          color="secondary"
+          size="50%"/>
+      </q-card-section>
+    </q-card>
   </q-page>
 </template>
 

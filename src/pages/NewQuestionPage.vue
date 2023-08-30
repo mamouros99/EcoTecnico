@@ -81,23 +81,28 @@
 <script>
 import { ref } from 'vue'
 import { useQuestionStore } from 'stores/QuestionStore'
+import { useUserStore } from 'stores/UserStore'
 
 export default {
   // name: 'PageName',
   setup () {
     const currentEmail = ref('')
     const currentQuestion = ref('')
-
     const helpDialog = ref(false)
 
+    // eslint-disable-next-line no-unused-vars
     const questionStore = useQuestionStore()
+    const userStore = useUserStore()
 
     const onSubmit = () => {
       const result = {
         email: currentEmail.value,
         question: currentQuestion.value,
-        time: Date.now().toString()
+        time: Date.now().toString(),
+        username: userStore.getUsername() || ''
+
       }
+      console.log(result)
       questionStore.addNewQuestion(result)
     }
     const onReset = () => {
