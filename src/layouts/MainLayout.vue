@@ -20,26 +20,34 @@
             TFaD
           </q-btn>
 
-          <div v-if="login">
+          <div v-if="!userStore.hasAuthenticatied()">
             <q-btn
               class="text-subtitle1"
               flat
               icon-right="login"
-              @click="login = !login"
+              @click="router.push('/login')"
             >
               Login
             </q-btn>
           </div>
 
           <div v-else>
-            <q-btn
+            <q-btn-dropdown
               class="text-subtitle1"
               flat
-              icon-right="person"
-              @click="login = !login"
+              icon="person"
+              :label="userStore.getFirstName()"
             >
-              Tiago
-            </q-btn>
+              <q-list>
+                <q-item clickable @click="userStore.logoutUser()">
+                  <q-item-section>
+                    <q-item-label>
+                      Logout
+                    </q-item-label>
+                  </q-item-section>
+                </q-item>
+              </q-list>
+            </q-btn-dropdown>
           </div>
 
         </q-toolbar>
@@ -82,21 +90,22 @@
 <script>
 import { defineComponent, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { useUserStore } from 'stores/UserStore'
 
 export default defineComponent({
   name: 'MainLayout',
 
   setup () {
     const router = useRouter()
+    const userStore = useUserStore()
     const route = useRoute()
     const page = ref('one')
-    const login = ref(false)
 
     return {
       route,
       page,
       router,
-      login
+      userStore
     }
   }
 })

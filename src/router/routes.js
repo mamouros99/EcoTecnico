@@ -24,6 +24,11 @@ const routes = [
         component: () => import('pages/QuestionListPage.vue')
       },
       {
+        path: 'login',
+        name: 'login',
+        component: () => import('pages/LoginPage.vue')
+      },
+      {
         path: 'newquestion',
         name: 'newquestion',
         component: () => import('pages/NewQuestionPage.vue')
