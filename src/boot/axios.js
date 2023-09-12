@@ -1,5 +1,6 @@
 import { boot } from 'quasar/wrappers'
-import axios from 'axios'
+import axios, { HttpStatusCode } from 'axios'
+import { useUserStore } from 'stores/UserStore'
 
 // Be careful when using SSR for cross-request state pollution
 // due to creating a Singleton instance here;
@@ -14,13 +15,28 @@ api.interceptors.response.use((response) => {
   if (!error.response) {
     return Promise.reject('Erro de Ligação')
   } else {
-    if (error.response.status === 500) {
-      return Promise.reject('Something went wrong')
+    if (error.response.status === HttpStatusCode.Unauthorized) {
+      const userStore = useUserStore()
+      userStore.logoutUser()
+      return Promise.reject(error.response.data)
+    } else if (error.response.data.message === undefined) {
+      return Promise.reject('Alguma correu mal no servidor')
     } else {
       return Promise.reject(error.response.data.message)
     }
   }
 })
+
+api.interceptors.request.use(
+  (config) => {
+    const userStore = useUserStore()
+    if (userStore.hasAuthenticatied()) {
+      const token = userStore.getToken()
+      config.headers.Authorization = 'Bearer ' + token
+    }
+    return config
+  }
+)
 
 export default boot(({ app }) => {
   // for use inside Vue files (Options API) through this.$axios and this.$api

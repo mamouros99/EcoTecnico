@@ -2,8 +2,11 @@ import { defineStore } from 'pinia'
 import { api } from 'boot/axios'
 import useNotify from 'src/composables/UseNotify'
 import { useRouter } from 'vue-router'
+import { ref } from 'vue'
 
 export const useQuestionStore = defineStore('QuestionStore', () => {
+  const questions = ref([])
+
   const addNewQuestion = async (question) => {
     console.log(question)
 
@@ -19,7 +22,9 @@ export const useQuestionStore = defineStore('QuestionStore', () => {
   }
 
   const addNewAnswer = async (answer, questionId) => {
-    return await api.post('answer/' + questionId)
+    console.log(questionId, '-', answer)
+
+    return await api.post('/question/answer/' + questionId, answer)
       .then(() => {
         notification.notifySuccess('Mensagem foi enviada com sucesso')
       })
@@ -28,11 +33,32 @@ export const useQuestionStore = defineStore('QuestionStore', () => {
       })
   }
 
+  const fetchQuestionById = async (id) => {
+    return await api.get('/question/get/' + id)
+  }
+
+  const fetchQuestionsByUsername = async (username) => {
+    await api.get('/question/get/all/' + username)
+      .then((response) => {
+        questions.value = response.data
+        console.log(questions.value)
+      })
+  }
+
+  const getQuestions = () => {
+    return questions.value
+  }
+
   const notification = useNotify()
   const router = useRouter()
 
   return {
+    getQuestions,
+
     addNewQuestion,
-    addNewAnswer
+    addNewAnswer,
+    fetchQuestionsByUsername,
+
+    fetchQuestionById
   }
 })

@@ -16,12 +16,12 @@ const routes = [
       {
         path: 'question/:id',
         name: 'question',
-        component: () => import('pages/QuestionPage.vue')
+        component: () => import('pages/Question/QuestionPage.vue')
       },
       {
         path: 'questions',
         name: 'questions',
-        component: () => import('pages/QuestionListPage.vue')
+        component: () => import('pages/Question/QuestionListPage.vue')
       },
       {
         path: 'login',
@@ -31,7 +31,7 @@ const routes = [
       {
         path: 'newquestion',
         name: 'newquestion',
-        component: () => import('pages/NewQuestionPage.vue')
+        component: () => import('pages/Question/NewQuestionPage.vue')
       },
       {
         path: 'report/:id',

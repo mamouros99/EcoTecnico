@@ -58,9 +58,10 @@
       <router-view/>
     </q-page-container>
     <q-footer
-      class="bg-transparent"
+      class="q-pt-xs "
+      style="border-top: 2px solid white"
     >
-      <q-toolbar class="justify-between">
+      <div class=" row justify-between items-center q-pt-sm">
         <q-icon
           class="q-ml-sm q-mb-md"
           name="img:ist-logo.png"
@@ -68,20 +69,19 @@
         />
 
         <q-btn
-          v-if="route.name !== 'questions'"
           rounded
           label="Questões"
-          color="secondary"
+          color="white"
           dense
           flat
           class=" q-mb-md q-mr-sm q-pl-sm "
           icon-right="question_mark"
           size="lg"
-          style="border: 5px dotted #26A69A; "
+          style="border: 5px dotted white; "
           @click="router.push('/questions')"
         />
 
-      </q-toolbar>
+      </div>
 
     </q-footer>
   </q-layout>

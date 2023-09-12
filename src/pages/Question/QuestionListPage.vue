@@ -73,6 +73,8 @@
 <script>
 import { useRouter } from 'vue-router'
 import { useUserStore } from 'stores/UserStore'
+import { onMounted, ref } from 'vue'
+import { useQuestionStore } from 'stores/QuestionStore'
 
 export default {
   // name: 'PageName',
@@ -80,61 +82,14 @@ export default {
   setup () {
     const router = useRouter()
     const userStore = useUserStore()
+    const questionStore = useQuestionStore()
 
-    const questions = [/*
-      {
-        id: 1,
-        question: 'De que cor é o céu?De que cor é o céu? ',
-        time: 123123120,
-        answers: [{
-          id: 1,
-          text: 'Porque sim',
-          fromApp: true,
-          time: 123123123,
-          viewed: false
-        },
-        {
-          id: 2,
-          text: 'Porque sim',
-          fromApp: false,
-          time: 123123123,
-          viewed: false
-        }],
+    const questions = ref([])
 
-        archived: false,
-        email: 'asdd@asd'
-      },
-      {
-        id: 2,
-        question: 'De que cor é o céu2?',
-        time: 123123120,
-        answers: [{
-          id: 1,
-          text: 'Porque sim2',
-          fromApp: true,
-          time: 123123123,
-          viewed: false
-
-        }],
-        archived: false,
-        email: 'asdd@asd'
-      },
-      {
-        id: 3,
-        question: 'De que cor é o céu3?',
-        time: 123123120,
-        answers: [{
-          id: 1,
-          text: 'Porque sim3',
-          fromApp: true,
-          time: 123123123,
-          viewed: false
-
-        }],
-        archived: true,
-        email: 'asdd@asd'
-      }
-     */]
+    onMounted(async () => {
+      await questionStore.fetchQuestionsByUsername(userStore.getUsername())
+      questions.value = questionStore.getQuestions()
+    })
 
     const countUnviewedAnswers = (question) => {
       return question.answers.filter(e => !e.viewed).length
