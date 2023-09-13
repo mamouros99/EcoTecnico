@@ -54,12 +54,14 @@
 import { useRoute } from 'vue-router'
 import { onMounted, ref } from 'vue'
 import { useQuestionStore } from 'stores/QuestionStore'
+import { useUserStore } from 'stores/UserStore'
 
 export default {
   setup () {
     const route = useRoute()
     const id = route.params.id
     const question = ref([])
+    const userStore = useUserStore()
 
     const formatDate = (stringDate) => {
       // receives string
@@ -101,6 +103,14 @@ export default {
     const questionStore = useQuestionStore()
 
     const addAnswer = async () => {
+      if (!userStore.hasAuthenticatied()) {
+        location.reload()
+      }
+
+      if (newAnswer.value.length === 0) {
+        return
+      }
+
       const auxAnswer = {
         text: newAnswer.value,
         fromApp: false,
@@ -111,8 +121,8 @@ export default {
       fetch()
     }
 
-    onMounted(() => {
-      fetch()
+    onMounted(async () => {
+      await fetch()
     })
 
     const fetch = () => {

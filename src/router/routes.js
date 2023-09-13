@@ -16,7 +16,10 @@ const routes = [
       {
         path: 'question/:id',
         name: 'question',
-        component: () => import('pages/Question/QuestionPage.vue')
+        component: () => import('pages/Question/QuestionPage.vue'),
+        meta: {
+          requiresAuth: true
+        }
       },
       {
         path: 'questions',
@@ -31,7 +34,10 @@ const routes = [
       {
         path: 'newquestion',
         name: 'newquestion',
-        component: () => import('pages/Question/NewQuestionPage.vue')
+        component: () => import('pages/Question/NewQuestionPage.vue'),
+        meta: {
+          requiresAuth: true
+        }
       },
       {
         path: 'report/:id',

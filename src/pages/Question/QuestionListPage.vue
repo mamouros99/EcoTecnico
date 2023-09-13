@@ -1,15 +1,21 @@
 <template>
   <q-page padding>
     <q-card>
-      <q-item-label header class="text-h5 text-primary row justify-between">
-        Questões e perguntas
+      <q-page-sticky
+        position="bottom-right"
+      >
         <q-btn
-          round
-          dense
+          v-if="userStore.hasAuthenticatied()"
+          class="q-mb-md q-mr-md"
+          label="Nova Pergunta"
+          rounded
           icon="add"
-          color="primary"
+          color="secondary"
           @click="router.push('/newquestion')"
         />
+      </q-page-sticky>
+      <q-item-label header class="text-h5 text-primary row justify-between">
+        Questões e perguntas
       </q-item-label>
       <q-separator color="secondary" size="3px"/>
       <q-separator/>
@@ -92,7 +98,7 @@ export default {
     })
 
     const countUnviewedAnswers = (question) => {
-      return question.answers.filter(e => !e.viewed).length
+      return question.answers.filter(e => !e.viewed && e.fromApp).length
     }
 
     return {

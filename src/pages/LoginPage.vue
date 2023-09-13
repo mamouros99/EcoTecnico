@@ -39,7 +39,6 @@ export default {
 
     onMounted(async () => {
       if (code.value) {
-        console.log(code.value)
         await userStore.getAuth(code.value)
           .then(() => {
             notification.notifySuccess('Login was Successful')

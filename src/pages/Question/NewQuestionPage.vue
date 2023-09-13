@@ -54,19 +54,6 @@
           </template>
         </q-input>
 
-        <q-input
-          class="q-mt-lg"
-          v-model="currentEmail"
-          standout
-          label="Email"
-          type="email"
-          :rules="[ val => val && val.length > 0 || 'Insira o seu email']"
-        >
-          <template v-slot:append>
-            <q-icon class="q-mr-md" name="email"/>
-          </template>
-        </q-input>
-
         <q-space/>
 
         <div class="q-px-lg q-mt-lg row justify-between">
@@ -86,7 +73,6 @@ import { useUserStore } from 'stores/UserStore'
 export default {
   // name: 'PageName',
   setup () {
-    const currentEmail = ref('')
     const currentQuestion = ref('')
     const helpDialog = ref(false)
 
@@ -96,22 +82,18 @@ export default {
 
     const onSubmit = () => {
       const result = {
-        email: currentEmail.value,
         question: currentQuestion.value,
         time: Date.now().toString(),
         username: userStore.getUsername() || ''
 
       }
-      console.log(result)
       questionStore.addNewQuestion(result)
     }
     const onReset = () => {
-      currentEmail.value = ''
       currentQuestion.value = ''
     }
 
     return {
-      currentEmail,
       currentQuestion,
       helpDialog,
       onSubmit,
