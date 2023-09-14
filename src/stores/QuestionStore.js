@@ -33,6 +33,10 @@ export const useQuestionStore = defineStore('QuestionStore', () => {
     return await api.get('/question/get/' + id)
   }
 
+  const hideQuestion = async (id) => {
+    await api.put('/question/hide/' + id)
+  }
+
   const fetchQuestionsByUsername = async (username) => {
     await api.get('/question/get/all/' + username)
       .then((response) => {
@@ -53,6 +57,8 @@ export const useQuestionStore = defineStore('QuestionStore', () => {
     addNewQuestion,
     addNewAnswer,
     fetchQuestionsByUsername,
+
+    hideQuestion,
 
     fetchQuestionById
 

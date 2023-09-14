@@ -35,7 +35,6 @@
             <q-card-section class="text-justify bg-blue-grey-9">
               <p>Se tem alguma questão relativamente ao projeto Técnico faz a Diferença ou relativamente à reciclagem no
                 geral, por favor apresente a sua questão aqui.</p>
-              <p>O email serve apenas para receber a resposta.</p>
             </q-card-section>
           </q-card>
         </q-dialog>

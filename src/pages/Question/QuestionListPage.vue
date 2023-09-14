@@ -1,6 +1,6 @@
 <template>
   <q-page padding>
-    <q-card>
+    <q-card flat>
       <q-page-sticky
         position="bottom-right"
       >
@@ -15,14 +15,17 @@
         />
       </q-page-sticky>
       <q-item-label header class="text-h5 text-primary row justify-between">
-        Questões e perguntas
+        Dúvidas e Questões
       </q-item-label>
       <q-separator color="secondary" size="3px"/>
       <q-separator/>
       <q-list v-if="userStore.hasAuthenticatied()" separator class="q-mt-xs">
-        <q-slide-item v-for="q in questions" :key="q.id">
+        <q-slide-item @right="right(q.id)" right-color="negative" v-for="q in questions" :key="q.id">
           <template v-slot:right>
-            <q-icon name="archive"/>
+            <div class="row">
+              <div class="text-subtitle1 q-mr-lg"> Apagar</div>
+              <q-icon name="archive"/>
+            </div>
           </template>
           <q-item clickable @click="router.push('question/' + q.id)">
             <q-item-section>
@@ -60,7 +63,7 @@
       </q-list>
       <q-card-section horizontal v-else>
         <q-card-section style="width: 50%;">
-          Por favor faça login para aceder ao seu histórico de questões
+          Por favor faça login para aceder ao seu histórico de questões ou para criar novas questões
         </q-card-section>
         <q-card-actions>
           <q-btn
@@ -93,9 +96,18 @@ export default {
     const questions = ref([])
 
     onMounted(async () => {
+      await fetch()
+    })
+
+    const right = async (id) => {
+      await questionStore.hideQuestion(id)
+      await fetch()
+    }
+
+    const fetch = async () => {
       await questionStore.fetchQuestionsByUsername(userStore.getUsername())
       questions.value = questionStore.getQuestions()
-    })
+    }
 
     const countUnviewedAnswers = (question) => {
       return question.answers.filter(e => !e.viewed && e.fromApp).length
@@ -105,7 +117,8 @@ export default {
       questions,
       countUnviewedAnswers,
       router,
-      userStore
+      userStore,
+      right
 
     }
   }
