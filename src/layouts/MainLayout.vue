@@ -53,37 +53,28 @@
         </q-toolbar>
       </div>
     </q-header>
+    <q-page-sticky position="bottom-right" style="z-index: 3">
+      <q-btn
+        icon="question_mark"
+        rounded
+        label="Questões"
+        color="secondary"
+        glossy
+        class="q-mr-md q-mb-md"
+        @click="router.push('/questions')"
+      />
+    </q-page-sticky>
     <q-page-container>
-
       <router-view/>
     </q-page-container>
-    <q-footer
-      class="q-pt-xs "
-      style="border-top: 2px solid white"
-    >
-      <div class=" row justify-between items-center q-pt-sm">
-        <q-icon
-          class="q-ml-sm q-mb-md"
-          name="img:ist-logo.png"
-          size="xl"
-        />
+    <q-page-sticky position="bottom-left">
+      <q-icon
+        class="q-ml-md q-mb-md"
+        name="img:ist-logo.png"
+        size="xl"
+      />
+    </q-page-sticky>
 
-        <q-btn
-          rounded
-          label="Questões"
-          color="white"
-          dense
-          flat
-          class=" q-mb-md q-mr-sm q-pl-sm "
-          icon-right="question_mark"
-          size="lg"
-          style="border: 5px dotted white; "
-          @click="router.push('/questions')"
-        />
-
-      </div>
-
-    </q-footer>
   </q-layout>
 </template>
 

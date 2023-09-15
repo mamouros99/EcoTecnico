@@ -1,21 +1,19 @@
 <template>
   <q-page padding>
     <q-card flat>
-      <q-page-sticky
-        position="bottom-right"
-      >
+
+      <q-item-label header class="text-h5 text-primary row justify-between">
+        <div class="row items-center">Dúvidas e Questões</div>
         <q-btn
           v-if="userStore.hasAuthenticatied()"
-          class="q-mb-md q-mr-md"
-          label="Nova Pergunta"
-          rounded
-          icon="add"
-          color="secondary"
+
+          round
+          icon="edit_square"
+          color="white"
+          flat
           @click="router.push('/newquestion')"
+
         />
-      </q-page-sticky>
-      <q-item-label header class="text-h5 text-primary row justify-between">
-        Dúvidas e Questões
       </q-item-label>
       <q-separator color="secondary" size="3px"/>
       <q-separator/>
