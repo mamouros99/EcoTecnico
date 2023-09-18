@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia'
 import { api } from 'boot/axios'
 import useNotify from 'src/composables/UseNotify'
-import { useRouter } from 'vue-router'
 import { ref } from 'vue'
 
 export const useQuestionStore = defineStore('QuestionStore', () => {
@@ -12,7 +11,6 @@ export const useQuestionStore = defineStore('QuestionStore', () => {
       .post('question/add', question)
       .then(() => {
         notification.notifySuccess('Pergunta foi gravada com sucesso')
-        router.push({ name: 'home' })
       })
       .catch(() => {
         notification.notifyError()
@@ -49,7 +47,6 @@ export const useQuestionStore = defineStore('QuestionStore', () => {
   }
 
   const notification = useNotify()
-  const router = useRouter()
 
   return {
     getQuestions,

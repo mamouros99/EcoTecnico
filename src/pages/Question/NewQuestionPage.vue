@@ -68,12 +68,15 @@
 import { ref } from 'vue'
 import { useQuestionStore } from 'stores/QuestionStore'
 import { useUserStore } from 'stores/UserStore'
+import { useRouter } from 'vue-router'
 
 export default {
   // name: 'PageName',
   setup () {
     const currentQuestion = ref('')
     const helpDialog = ref(false)
+    // eslint-disable-next-line no-unused-vars
+    const router = useRouter()
 
     // eslint-disable-next-line no-unused-vars
     const questionStore = useQuestionStore()
@@ -87,6 +90,7 @@ export default {
 
       }
       questionStore.addNewQuestion(result)
+      router.push({ name: 'home' })
     }
     const onReset = () => {
       currentQuestion.value = ''
