@@ -10,31 +10,27 @@
       style="width: 90vw; background-color: rgb(192,192,192,.5)"
     >
       <q-card-section class="text-center">
-        O <span class="text-bold text-italic">Técnico Faz a Diferença</span> está a tentar tornar o campus um espaço
-        mais ecológico,
-        através da
-        separação do
-        lixo!
+        <span class="text-bold text-italic"> {{$t('tfad')}}</span>
+        {{
+          $t('msg_main_one')
+        }}
       </q-card-section>
 
       <q-card-section class="text-center">
-        Mas para o conseguir, precisa da tua ajuda! Se nas EcoIlhas vires algum caixote
-        <span class="text-bold">cheio</span>,
-        <span class="text-bold">sujo</span> ou com
-        <span class="text-bold">má separação</span>,
-        informa-nos!
+        {{ $t('msg_main_two')}}
       </q-card-section>
 
       <q-card-section class="text-center">
-        Basta ler o QR code na placa da EcoIlha e identificar o problema! Ajuda-nos a tornar o Técnico um lugar mais
-        Eco!
+        {{ $t('msg_main_three')}}
+
       </q-card-section>
 
     </q-card>
 
     <q-btn
       color="primary"
-      rounded size="xl"
+      rounded
+      size="lg"
       style="border: 3px solid white"
       icon="photo_camera"
       label="Scan QR Code !"

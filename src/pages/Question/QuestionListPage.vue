@@ -3,7 +3,7 @@
     <q-card flat>
 
       <q-item-label header class="text-h5 text-primary row justify-between">
-        <div class="row items-center">Dúvidas e Questões</div>
+        <div class="row items-center">{{ $t('questions')}}</div>
         <q-btn
           v-if="userStore.hasAuthenticatied()"
 
@@ -21,7 +21,7 @@
         <q-slide-item @right="right(q.id)" right-color="negative" v-for="q in questions" :key="q.id">
           <template v-slot:right>
             <div class="row">
-              <div class="text-subtitle1 q-mr-lg"> Apagar</div>
+              <div class="text-subtitle1 q-mr-lg"> {{ $t('delete') }}</div>
               <q-icon name="archive"/>
             </div>
           </template>
@@ -52,7 +52,7 @@
                 color="secondary"
               >
                 <q-tooltip>
-                  Este chat foi arquivado
+                  {{ $t('msg_archived')}}
                 </q-tooltip>
               </q-btn>
             </q-item-section>
@@ -61,8 +61,7 @@
       </q-list>
       <q-card-section horizontal v-else>
         <q-card-section style="width: 50%;">
-          Por favor faça login para aceder ao seu histórico de questões ou para criar novas questões
-        </q-card-section>
+          {{$t('msg_login')}}        </q-card-section>
         <q-card-actions>
           <q-btn
             color="primary"
@@ -103,8 +102,10 @@ export default {
     }
 
     const fetch = async () => {
-      await questionStore.fetchQuestionsByUsername(userStore.getUsername())
-      questions.value = questionStore.getQuestions()
+      if (userStore.getUser()) {
+        await questionStore.fetchQuestionsByUsername(userStore.getUsername())
+        questions.value = questionStore.getQuestions()
+      }
     }
 
     const countUnviewedAnswers = (question) => {

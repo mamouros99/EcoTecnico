@@ -53,27 +53,47 @@
         </q-toolbar>
       </div>
     </q-header>
-    <q-page-sticky position="bottom-right" style="z-index: 3">
-      <q-btn
-        icon="question_mark"
-        rounded
-        label="Questões"
-        color="secondary"
-        glossy
-        class="q-mr-md q-mb-md"
-        @click="router.push('/questions')"
-      />
-    </q-page-sticky>
     <q-page-container>
       <router-view/>
     </q-page-container>
-    <q-page-sticky position="bottom-left">
-      <q-icon
-        class="q-ml-md q-mb-md"
-        name="img:ist-logo.png"
-        size="xl"
+    <q-footer class="bg-transparent q-mx-sm q-mb-sm q-pt-sm justify-between row" style="backdrop-filter: blur(7px)">
+      <q-btn-dropdown
+        icon="flag"
+        :label="$i18n.locale"
+        dropdown-icon="none"
+      >
+        <q-list dense >
+          <q-btn
+            no-caps
+            class="full-width"
+            @click="() => {
+              $i18n.locale = 'pt-PT'
+              languageStore.storeLanguage('pt-PT')
+
+            }"
+            label="pt-PT"
+          />
+          <q-btn
+            no-caps
+            class="full-width"
+            @click="() => {
+              $i18n.locale = 'en-US'
+              languageStore.storeLanguage('en-US')
+            }"
+            label="en-US"
+          />
+        </q-list>
+      </q-btn-dropdown>
+      <q-btn
+        icon="question_mark"
+        rounded
+        :label="$t('questions')"
+        color="secondary"
+        glossy
+        @click="router.push('/questions')"
       />
-    </q-page-sticky>
+
+    </q-footer>
 
   </q-layout>
 </template>
@@ -82,6 +102,7 @@
 import { defineComponent, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useUserStore } from 'stores/UserStore'
+import { useLanguageStore } from 'stores/LanguageStore'
 
 export default defineComponent({
   name: 'MainLayout',
@@ -89,6 +110,7 @@ export default defineComponent({
   setup () {
     const router = useRouter()
     const userStore = useUserStore()
+    const languageStore = useLanguageStore()
     const route = useRoute()
     const page = ref('one')
 
@@ -96,7 +118,8 @@ export default defineComponent({
       route,
       page,
       router,
-      userStore
+      userStore,
+      languageStore
     }
   }
 })

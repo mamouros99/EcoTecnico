@@ -1,8 +1,8 @@
 <template>
   <q-page padding class="column justify-center row items-center">
     <q-card flat bordered>
-      <q-card-section class="text-h4 text-primary">
-        Por favor aguarde...
+      <q-card-section class="text-h4 text-primary text-center">
+        {{$t('msg_login_wait')}}
       </q-card-section>
       <q-card-section class="column items-center ">
         <q-spinner-bars
@@ -18,6 +18,7 @@ import { computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useUserStore } from 'stores/UserStore'
 import useNotify from 'src/composables/UseNotify'
+import { useI18n } from 'vue-i18n'
 
 export default {
   // name: 'PageName',
@@ -37,11 +38,13 @@ export default {
       return route.query.code
     })
 
+    const { t } = useI18n()
+
     onMounted(async () => {
       if (code.value) {
         await userStore.getAuth(code.value)
           .then(() => {
-            notification.notifySuccess('Login was Successful')
+            notification.notifySuccess(t('msg_good_login'))
           })
           .catch((errorMessage) => {
             notification.notifyError(errorMessage)

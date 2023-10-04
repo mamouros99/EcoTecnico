@@ -9,7 +9,7 @@
         <q-btn
           rounded
           icon="edit"
-          label="Editar"
+          :label="$t('edit')"
           v-close-popup
           color="negative"
           class="q-mx-xs"
@@ -18,7 +18,7 @@
         <q-btn
           rounded
           icon="send"
-          label="Submeter"
+          :label="$t('submit')"
           v-close-popup
           color="positive"
           class="q-mx-xs"

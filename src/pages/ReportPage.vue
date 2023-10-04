@@ -2,8 +2,9 @@
   <q-page padding style="max-width: 700px; margin: auto">
     <div v-if="loaded" class="column self-center q-ma-lg">
 
-      <div class="text-h5 q-pa-sm q-mb-lg">
-        Selecione os problemas existentes na Eco Ilha {{ ecoIsland.identifier }} - {{ ecoIsland.building }}:
+      <div >
+        <div class="text-h5">{{ ecoIsland.building }}, {{$t('floor')}} {{ ecoIsland.floor }} </div>
+        <div class="q-ml-sm text-subtitle1">{{ $t('ecoisland') }} {{ ecoIsland.identifier }} </div>
       </div>
       <q-list>
         <div v-for="bin in bins" :key="bin.name">

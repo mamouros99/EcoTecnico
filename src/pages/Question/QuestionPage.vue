@@ -33,7 +33,7 @@
           }"
       />
       <q-input
-        placeholder="Nova Mensagem..."
+        :placeholder="$t('placeholder')"
         color="secondary"
         class="q-my-md"
         style="width: 80%"
@@ -45,7 +45,7 @@
       />
     </q-card-section>
     <q-card-section v-else>
-      Este chat foi arquivado.
+     {{ $t('msg_archived')}}
     </q-card-section>
   </q-page>
 </template>

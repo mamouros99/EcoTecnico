@@ -8,7 +8,7 @@
       <q-toolbar class="text-h4 q-py-lg">
         <q-toolbar-title
           class="text-h5">
-          Dúvidas e Questões
+          {{ $t('questions') }}
         </q-toolbar-title>
         <q-btn
           color="secondary"
@@ -21,7 +21,7 @@
           <q-card class="bg-primary">
             <q-card-section class="q-mx-md justify-between" horizontal>
               <q-card-section class="text-h5">
-                Ajuda
+                {{ $t('help') }}
               </q-card-section>
               <q-btn
                 icon="close"
@@ -33,8 +33,7 @@
               />
             </q-card-section>
             <q-card-section class="text-justify bg-blue-grey-9">
-              <p>Se tem alguma questão relativamente ao projeto Técnico faz a Diferença ou relativamente à reciclagem no
-                geral, por favor apresente a sua questão aqui.</p>
+              <p>{{ $t('msg_help')}}</p>
             </q-card-section>
           </q-card>
         </q-dialog>
@@ -44,9 +43,9 @@
         <q-input
           v-model="currentQuestion"
           standout
-          label="Pergunta"
+          :label="$t('question')"
           type="textarea"
-          :rules="[ val => val && val.length > 0 || 'Escreva a pergunta']"
+          :rules="[ val => val && val.length > 0 || $t('msg_question')]"
         >
           <template v-slot:append>
             <q-icon class="q-mr-md" size="md" name="edit_note"/>
@@ -56,7 +55,7 @@
         <q-space/>
 
         <div class="q-px-lg q-mt-lg row justify-between">
-          <q-btn label="Submit" type="submit" color="primary"/>
+          <q-btn :label="$t('submit')" type="submit" color="primary"/>
           <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm"/>
         </div>
       </div>
