@@ -7,7 +7,7 @@
         <div class="q-ml-sm text-subtitle1">{{ $t('ecoisland') }} {{ ecoIsland.identifier }} </div>
       </div>
       <q-list>
-        <div v-for="bin in bins" :key="bin.name">
+        <div v-for="bin in bins" :key="bin.label">
           <q-expansion-item
             group="test"
             :hide-expand-icon="true"
@@ -21,7 +21,7 @@
                   :class="isClassActive(bin)"
                   class="row"
                 >
-                  <q-item-label class="text-h6 col">{{ bin.name }}</q-item-label>
+                  <q-item-label class="text-h6 col">{{ $t(bin.label) }}</q-item-label>
                 </q-item-section>
                 <q-item-section avatar :class="isClassActive(bin)"
                 >
@@ -44,7 +44,7 @@
               >
                 <q-item-section>
                   <q-item-label>
-                    Cheio
+                    {{ $t('full')}}
                   </q-item-label>
                 </q-item-section>
                 <q-item-section side>
@@ -64,7 +64,8 @@
               >
                 <q-item-section>
                   <q-item-label>
-                    Sujo
+                    {{ $t('dirty') }}
+
                   </q-item-label>
                 </q-item-section>
                 <q-item-section side>
@@ -84,7 +85,7 @@
               >
                 <q-item-section>
                   <q-item-label>
-                    Má Separação
+                    {{ $t('poor_separation') }}
                   </q-item-label>
                 </q-item-section>
                 <q-item-section side>
@@ -114,7 +115,7 @@
               >
                 <q-item-label class="text-h6 row items-center justify-between">
                   <q-item-section style="display: inline-block">
-                    Notas
+                    {{ $t('notes') }}
                     <q-btn v-if="message.length > 0" flat dense color="red" icon="close" @click="message=''"/>
                   </q-item-section>
                   <q-item-section avatar>
@@ -141,7 +142,7 @@
 
       <q-btn
         icon="send"
-        label="Submeter"
+        :label="$t('submit')"
         padding="sm md"
         color="secondary"
         rounded
@@ -189,6 +190,8 @@ export default {
       notifyWarning,
       notifyError
     } = useNotify()
+
+    // eslint-disable-next-line no-unused-vars
     const getReadySubmit = () => {
       // check if all good with submission
       if (reportedOnBins.value.length > 0 || message.value.length > 0) {
@@ -244,10 +247,10 @@ export default {
         return 'delete_outline'
       }
     }
+
     const defaultBins = [
       {
         label: 'undifferentiated',
-        name: 'Indiferenciado',
         color: 'white',
         checked: false,
         full: false,
@@ -256,7 +259,6 @@ export default {
       },
       {
         label: 'paper',
-        name: 'Papel',
         color: 'blue',
         checked: false,
         full: false,
@@ -265,7 +267,6 @@ export default {
       },
       {
         label: 'plastic',
-        name: 'Embalagens',
         color: 'yellow',
         checked: false,
         full: false,
@@ -276,7 +277,6 @@ export default {
 
     const glass = {
       label: 'glass',
-      name: 'Vidro',
       color: 'green',
       checked: false,
       full: false,
@@ -286,7 +286,6 @@ export default {
 
     const bio = {
       label: 'bio',
-      name: 'Biorresíduos',
       color: 'brown',
       checked: false,
       full: false,

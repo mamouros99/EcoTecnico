@@ -8,6 +8,9 @@ export default {
   edit: 'Edit',
   ecoisland: 'Ecoisland',
   floor: 'Floor',
+  full: 'Full',
+  dirty: 'Dirty',
+  poor_separation: 'Poor Separation',
   submit: 'Submit',
   delete: 'Delete',
   help: 'Help',
@@ -21,6 +24,12 @@ export default {
   msg_question: 'Write your question',
   msg_archived: 'This chat was archived',
   msg_login: 'Please log in to access your question history or to create new questions',
-  placeholder: 'New Message...'
+  placeholder: 'New Message...',
+  paper: 'Paper',
+  plastic: 'Plastic',
+  glass: 'Glass',
+  bio: 'Biowaste',
+  undifferentiated: 'Undifferentiated',
+  notes: 'Notes'
 
 }

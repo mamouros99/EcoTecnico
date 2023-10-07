@@ -56,7 +56,7 @@
     <q-page-container>
       <router-view/>
     </q-page-container>
-    <q-footer class="bg-transparent q-mx-sm q-mb-sm q-pt-sm justify-between row" style="backdrop-filter: blur(7px)">
+    <q-footer class="bg-transparent q-pt-xs q-px-sm  justify-between row" style="backdrop-filter: blur(7px)">
       <q-btn-dropdown
         icon="flag"
         :label="$i18n.locale"

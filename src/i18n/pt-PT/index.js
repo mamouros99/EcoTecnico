@@ -9,6 +9,9 @@ export default {
   tfad: 'O Técnico Faz a Diferença',
   ecoisland: 'Ecoílha',
   floor: 'Piso',
+  full: 'Cheio',
+  dirty: 'Sujo',
+  poor_separation: 'Má Separação',
   submit: 'Submeter',
   delete: 'Apagar',
   help: 'Ajuda',
@@ -21,5 +24,12 @@ export default {
   msg_question: 'Escreva a pergunta',
   msg_archived: 'Este chat foi arquivado',
   msg_login: 'Por favor faça login para aceder ao seu histórico de questões ou para criar novas questões',
-  placeholder: 'Nova Mensagem...'
+  placeholder: 'Nova Mensagem...',
+  paper: 'Papel',
+  plastic: 'Embalagens',
+  glass: 'Vidro',
+  bio: 'Biorresíduos',
+  undifferentiated: 'Indiferenciado',
+  notes: 'Notas'
+
 }
