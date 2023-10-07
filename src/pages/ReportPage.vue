@@ -191,7 +191,6 @@ export default {
       notifyError
     } = useNotify()
 
-    // eslint-disable-next-line no-unused-vars
     const getReadySubmit = () => {
       // check if all good with submission
       if (reportedOnBins.value.length > 0 || message.value.length > 0) {
